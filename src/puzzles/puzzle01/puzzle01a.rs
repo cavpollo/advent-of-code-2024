@@ -1,6 +1,8 @@
+#![allow(dead_code)]
+
 use regex::Regex;
 use crate::execution_type::ExecutionType;
-use crate::tools;
+use crate::tools::file;
 
 pub fn run(execution_type: ExecutionType) {
     let mut left_list = Vec::new();
@@ -8,7 +10,7 @@ pub fn run(execution_type: ExecutionType) {
 
     let regex = Regex::new(r"\s+").expect("Failed to parse the regex string");
 
-    let buffer_lines = tools::get_puzzle_buffer_lines(1, execution_type);
+    let buffer_lines = file::get_puzzle_buffer_lines(1, execution_type);
     for read_line in buffer_lines {
         let line = read_line.expect("Failed to read the line from stdin");
         if line.trim().is_empty() {
