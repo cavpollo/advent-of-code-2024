@@ -5,12 +5,10 @@ mod tools;
 
 use std::time::Instant;
 use execution_type::ExecutionType;
-use puzzles::puzzle01;
+use puzzles::puzzle02;
 
 fn main() {
     execute_measuring_time!({
-        // puzzle01::puzzle01a::run(ExecutionType::Real);
-        // puzzle01::puzzle01b::run(ExecutionType::Sample);
-        puzzle01::puzzle01b::run(ExecutionType::Real);
+        puzzle02::puzzle02a::run(ExecutionType::Real);
     });
 }
