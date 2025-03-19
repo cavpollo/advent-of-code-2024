@@ -20,7 +20,7 @@ pub fn run(execution_type: ExecutionType) {
             .collect();
 
         let is_safe = is_safe(&level_list);
-        if (is_safe) {
+        if is_safe {
             safe_levels += 1;
         }
     }
@@ -39,7 +39,7 @@ fn is_safe(vector: &Vec<i32>) -> bool {
     let mut cursor_position: i32 = 0;
 
     loop {
-        if (cursor_position + 1 >= vector.len() as i32) {
+        if cursor_position + 1 >= vector.len() as i32 {
             break;
         }
 
@@ -56,8 +56,7 @@ fn is_safe(vector: &Vec<i32>) -> bool {
 
         if last_value_difference == 0 {
             last_value_difference = value_difference;
-        } else if (value_difference.is_negative() && last_value_difference.is_positive()) ||
-            (value_difference.is_positive() && last_value_difference.is_negative()) {
+        } else if value_difference.is_positive() != last_value_difference.is_positive() {
             // println!("Not Safe direction!");
             return false
         }
