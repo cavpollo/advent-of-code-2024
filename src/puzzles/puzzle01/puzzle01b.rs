@@ -1,16 +1,15 @@
 #![allow(dead_code)]
 
 use regex::Regex;
-use crate::execution_type::ExecutionType;
 use crate::tools::file;
 
-pub fn run(execution_type: ExecutionType) {
+pub fn run() {
     let mut left_list: Vec<(i32, i16)> = Vec::new();
     let mut right_list: Vec<(i32, i16)> = Vec::new();
 
     let regex = Regex::new(r"\s+").expect("Failed to parse the regex string");
 
-    let buffer_lines = file::get_puzzle_buffer_lines(1, execution_type);
+    let buffer_lines = file::get_puzzle_buffer_lines(1);
     for read_line in buffer_lines {
         let line = read_line.expect("Failed to read the line from stdin");
         if line.trim().is_empty() {
@@ -101,5 +100,62 @@ fn get_value_count(vector: &Vec<(i32, i16)>, value: i32) -> Option<i16> {
         if higher_limit < lower_limit {
             return None;
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn sample_tests_work() {
+        let mut sample_vector: Vec<(i32, i16)> = vec![];
+        insert_value(&mut sample_vector, 3);
+        assert_eq!(sample_vector[0].0, 3);
+        assert_eq!(sample_vector[0].1, 1);
+
+        insert_value(&mut sample_vector, 4);
+        assert_eq!(sample_vector[0].0, 3);
+        assert_eq!(sample_vector[0].1, 1);
+        assert_eq!(sample_vector[1].0, 4);
+        assert_eq!(sample_vector[1].1, 1);
+
+        insert_value(&mut sample_vector, 2);
+        assert_eq!(sample_vector[0].0, 2);
+        assert_eq!(sample_vector[0].1, 1);
+        assert_eq!(sample_vector[1].0, 3);
+        assert_eq!(sample_vector[1].1, 1);
+        assert_eq!(sample_vector[2].0, 4);
+        assert_eq!(sample_vector[2].1, 1);
+
+        insert_value(&mut sample_vector, 1);
+        assert_eq!(sample_vector[0].0, 1);
+        assert_eq!(sample_vector[0].1, 1);
+        assert_eq!(sample_vector[1].0, 2);
+        assert_eq!(sample_vector[1].1, 1);
+        assert_eq!(sample_vector[2].0, 3);
+        assert_eq!(sample_vector[2].1, 1);
+        assert_eq!(sample_vector[3].0, 4);
+        assert_eq!(sample_vector[3].1, 1);
+
+        insert_value(&mut sample_vector, 3);
+        assert_eq!(sample_vector[0].0, 1);
+        assert_eq!(sample_vector[0].1, 1);
+        assert_eq!(sample_vector[1].0, 2);
+        assert_eq!(sample_vector[1].1, 1);
+        assert_eq!(sample_vector[2].0, 3);
+        assert_eq!(sample_vector[2].1, 2);
+        assert_eq!(sample_vector[3].0, 4);
+        assert_eq!(sample_vector[3].1, 1);
+
+        insert_value(&mut sample_vector, 3);
+        assert_eq!(sample_vector[0].0, 1);
+        assert_eq!(sample_vector[0].1, 1);
+        assert_eq!(sample_vector[1].0, 2);
+        assert_eq!(sample_vector[1].1, 1);
+        assert_eq!(sample_vector[2].0, 3);
+        assert_eq!(sample_vector[2].1, 3);
+        assert_eq!(sample_vector[3].0, 4);
+        assert_eq!(sample_vector[3].1, 1);
     }
 }

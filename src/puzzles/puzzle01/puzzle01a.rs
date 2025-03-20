@@ -1,16 +1,15 @@
 #![allow(dead_code)]
 
 use regex::Regex;
-use crate::execution_type::ExecutionType;
 use crate::tools::file;
 
-pub fn run(execution_type: ExecutionType) {
+pub fn run() {
     let mut left_list = Vec::new();
     let mut right_list = Vec::new();
 
     let regex = Regex::new(r"\s+").expect("Failed to parse the regex string");
 
-    let buffer_lines = file::get_puzzle_buffer_lines(1, execution_type);
+    let buffer_lines = file::get_puzzle_buffer_lines(1);
     for read_line in buffer_lines {
         let line = read_line.expect("Failed to read the line from stdin");
         if line.trim().is_empty() {
@@ -63,5 +62,33 @@ fn get_insert_position(vector: &Vec<i32>, value_to_insert: i32) -> usize {
         if higher_limit < lower_limit {
             return lower_limit as usize;
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn sample_tests_work() {
+        let sample_vector_0 = vec![];
+        let sample_position_0 = get_insert_position(&sample_vector_0, 3);
+        assert_eq!(sample_position_0, 0);
+
+        let sample_vector_1 = vec![3];
+        let sample_position_1 = get_insert_position(&sample_vector_1, 4);
+        assert_eq!(sample_position_1, 1);
+
+        let sample_vector_2 = vec![3, 4];
+        let sample_position_2 = get_insert_position(&sample_vector_2, 2);
+        assert_eq!(sample_position_2, 0);
+
+        let sample_vector_3 = vec![1, 2, 3, 4];
+        let sample_position_3 = get_insert_position(&sample_vector_3, 3);
+        assert_eq!(sample_position_3, 2);
+
+        let sample_vector_4 = vec![1, 2, 3, 3, 4];
+        let sample_position_4 = get_insert_position(&sample_vector_4, 3);
+        assert_eq!(sample_position_4, 2);
     }
 }
