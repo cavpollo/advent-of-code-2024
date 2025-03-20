@@ -3,7 +3,7 @@
 use regex::Regex;
 use crate::tools::file;
 
-pub fn run() {
+pub fn run() -> i32 {
     let mut safe_levels = 0;
 
     let regex = Regex::new(r"\s+").expect("Failed to parse the regex string");
@@ -24,7 +24,7 @@ pub fn run() {
         }
     }
 
-    println!("Result: {}", safe_levels);
+    safe_levels
 }
 
 fn is_safe(vector: &Vec<i32>) -> bool {

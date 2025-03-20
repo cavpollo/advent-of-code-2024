@@ -3,7 +3,7 @@
 use regex::Regex;
 use crate::tools::file;
 
-pub fn run() {
+pub fn run() -> i32 {
     let mut left_list = Vec::new();
     let mut right_list = Vec::new();
 
@@ -35,7 +35,7 @@ pub fn run() {
         total_difference = total_difference + difference;
     }
 
-    println!("Result: {}", total_difference);
+    total_difference
 }
 
 fn get_insert_position(vector: &Vec<i32>, value_to_insert: i32) -> usize {
