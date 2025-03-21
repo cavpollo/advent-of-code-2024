@@ -8,8 +8,8 @@ impl Puzzle03b {
     fn parse_operations(operations_string: &str, active: &mut bool) -> i32 {
         let mul_regex = Regex::new(r"mul\((\d+),(\d+)\)").expect("Failed to parse the regex string");
         let do_regex = Regex::new(r"do\(\)").expect("Failed to parse the regex string");
-        let dont_regex = Regex::new(r"don\'t\(\)").expect("Failed to parse the regex string");
-        let full_regex = Regex::new(r"mul\((\d+),(\d+)\)|don\'t\(\)|do\(\)").expect("Failed to parse the regex string");
+        let dont_regex = Regex::new(r"don't\(\)").expect("Failed to parse the regex string");
+        let full_regex = Regex::new(r"mul\((\d+),(\d+)\)|don't\(\)|do\(\)").expect("Failed to parse the regex string");
 
         let mut cumulative_result= 0;
         for operation_capture in full_regex.captures_iter(operations_string) {
