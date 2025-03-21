@@ -14,25 +14,25 @@ impl Puzzle03b {
         let mut cumulative_result= 0;
         for operation_capture in full_regex.captures_iter(operations_string) {
             let captured_text = &operation_capture[0];
-            print!("active {:?} captured: {:?} ", active, captured_text);
+            // print!("active {:?} captured: {:?} ", active, captured_text);
 
             if mul_regex.is_match(captured_text) {
                 if !*active {
-                    println!("- SKIP");
+                    // println!("- SKIP");
                     continue
                 }
 
                 let value_0 = &operation_capture[1].parse::<i32>().expect("Failed to parse the integer");
                 let value_1 = &operation_capture[2].parse::<i32>().expect("Failed to parse the integer");
 
-                println!("- parsed {:?} {:?}", value_0, value_1);
+                // println!("- parsed {:?} {:?}", value_0, value_1);
 
                 cumulative_result += value_0 * value_1;
             } else if dont_regex.is_match(captured_text) {
-                println!("- DEACTIVATED");
+                // println!("- DEACTIVATED");
                 *active = false;
             } else if do_regex.is_match(captured_text) {
-                println!("- ACTIVATED");
+                // println!("- ACTIVATED");
                 *active = true
             } else {
                 panic!("Unknown parsed the regex string {:?}", captured_text);
@@ -60,7 +60,7 @@ impl Puzzle for Puzzle03b {
             let result = Puzzle03b::parse_operations(&line, &mut active);
             cumulative_result += result;
 
-            println!("--- LINE BREAK");
+            // println!("--- LINE BREAK");
         }
 
         cumulative_result
