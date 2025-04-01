@@ -9,6 +9,7 @@ use puzzles::puzzle02::puzzle02a::Puzzle02a;
 use puzzles::puzzle02::puzzle02b::Puzzle02b;
 use puzzles::puzzle03::puzzle03a::Puzzle03a;
 use puzzles::puzzle03::puzzle03b::Puzzle03b;
+use puzzles::puzzle04::puzzle04a::Puzzle04a;
 use puzzles::Puzzle;
 
 fn main() {
@@ -33,6 +34,7 @@ fn get_puzzle(puzzle_id: &str) -> fn() -> i32 {
         "2b" => Puzzle02b::run,
         "3a" => Puzzle03a::run,
         "3b" => Puzzle03b::run,
+        "4a" => Puzzle04a::run,
         _ => panic!("Unknown level id {}.", puzzle_id),
     }
 }
