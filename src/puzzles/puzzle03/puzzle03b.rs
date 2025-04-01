@@ -1,6 +1,8 @@
-use regex::Regex;
 use crate::puzzles::Puzzle;
 use crate::tools::file;
+use regex::Regex;
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 
 pub struct Puzzle03b;
 
@@ -47,11 +49,15 @@ impl Puzzle03b {
 
 impl Puzzle for Puzzle03b {
     fn run() -> i32 {
+        let puzzle_file = file::get_puzzle_input_file(3);
+        Puzzle03b::run_for_file(puzzle_file)
+    }
+
+    fn run_for_file(file: File) -> i32 {
         let mut cumulative_result= 0;
         let mut active = true;
 
-        let buffer_lines = file::get_puzzle_buffer_lines(3);
-        for read_line in buffer_lines {
+        for read_line in BufReader::new(file).lines() {
             let line = read_line.expect("Failed to read the line from stdin");
             if line.trim().is_empty() {
                 break;
@@ -118,20 +124,8 @@ mod tests {
 
     #[test]
     fn extra_tests_work() {
-        let mut active_0 = true;
-        let sample_0_string = "mul(2,3)xmult(4,5)rmul(6,7)";
-        let sample_0_result = Puzzle03b::parse_operations(&sample_0_string, &mut active_0);
-        assert_eq!(sample_0_result, 48);
-        assert_eq!(active_0, true);
-
-        let sample_0_string = "mul(2,3)don't()mut(4,5)mul(6,7)";
-        let sample_0_result = Puzzle03b::parse_operations(&sample_0_string, &mut active_0);
-        assert_eq!(sample_0_result, 6);
-        assert_eq!(active_0, false);
-
-        let sample_0_string = "mul(2,3)xmult(4,5)do()mul(6,7)";
-        let sample_0_result = Puzzle03b::parse_operations(&sample_0_string, &mut active_0);
-        assert_eq!(sample_0_result, 42);
-        assert_eq!(active_0, true);
+        let puzzle_file = file::get_puzzle_sample_file(3, 1);
+        let result = Puzzle03b::run_for_file(puzzle_file);
+        assert_eq!(result, 96);
     }
 }

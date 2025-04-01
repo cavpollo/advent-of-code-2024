@@ -1,0 +1,3 @@
+mul(2,3)xmult(4,5)rmul(6,7)
+mul(2,3)don't()mut(4,5)mul(6,7)
+mul(2,3)xmult(4,5)do()mul(6,7)

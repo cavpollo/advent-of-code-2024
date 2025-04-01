@@ -1,8 +1,8 @@
-#![allow(dead_code)]
-
-use regex::Regex;
 use crate::puzzles::Puzzle;
 use crate::tools::file;
+use regex::Regex;
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 
 pub struct Puzzle01a;
 
@@ -37,13 +37,17 @@ impl Puzzle01a {
 
 impl Puzzle for Puzzle01a {
     fn run() -> i32 {
+        let puzzle_file = file::get_puzzle_input_file(1);
+        Puzzle01a::run_for_file(puzzle_file)
+    }
+
+    fn run_for_file(file: File) -> i32 {
         let mut left_list = Vec::new();
         let mut right_list = Vec::new();
 
         let regex = Regex::new(r"\s+").expect("Failed to parse the regex string");
 
-        let buffer_lines = file::get_puzzle_buffer_lines(1);
-        for read_line in buffer_lines {
+        for read_line in BufReader::new(file).lines() {
             let line = read_line.expect("Failed to read the line from stdin");
             if line.trim().is_empty() {
                 break;
