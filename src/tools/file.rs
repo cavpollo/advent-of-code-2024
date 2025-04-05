@@ -13,6 +13,7 @@ pub fn get_puzzle_input_file(
     get_file(&input_file_path)
 }
 
+#[allow(dead_code)]
 pub fn get_puzzle_sample_file(
     puzzle_id: i8, sample_id: i8,
 ) -> File {
@@ -31,6 +32,7 @@ fn get_input_file_name(
     format!("assets/puzzle{}_input.txt", zero_padded_puzzle_id)
 }
 
+#[allow(dead_code)]
 fn get_sample_file_name(
     puzzle_id: i8,
     sample_id: i8,

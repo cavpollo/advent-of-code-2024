@@ -21,7 +21,7 @@ impl Puzzle for Puzzle04a {
 
         // X position, matching direction, String position, tracked String
         let mut last_trackers: Vec<(i32, i8, i8, &str)> = Vec::new();
-        let mut current_trackers: Vec<(i32, i8, i8, &str)> = Vec::new();
+        let mut current_trackers: Vec<(i32, i8, i8, &str)>;
         let mut cumulative_result= 0;
 
         for read_line in BufReader::new(file).lines() {
